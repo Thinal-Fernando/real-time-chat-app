@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link rel="stylesheet" href="../static/style.css">
     <title>Chat App</title>
 </head>
 <body>
     <h2>Welcome, {{username}}</h2>
 
-    <div id="chatBox" style="border:1px solid #000; height:200px; overflow-y:auto; margin-bottom:10px;"></div>
-
-    <input type="text" id="messageInput" placeholder="type a message...">
-    <button onclick="sendMessage()">Send</button>
+    <div id="chatBox"></div>
+    
+    <div class="Inputs">
+        <input type="text" id="messageInput" placeholder="Type something...">
+        <button onclick="sendMessage()">🔼</button>
+    </div>
+    
 
     <h3>Active Users</h3>
     <ul id="users"></ul>

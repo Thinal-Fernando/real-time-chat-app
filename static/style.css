@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #242529;
+  color: #333;
+}
+
+h2 {
+  color: white;
+  padding: 20px;
+}
+
+#chatBox {
+  background: linear-gradient(to bottom, #242529, #3a3b3f);
+  height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  margin-bottom: 10px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-left: 40px;
+  margin-right: 220px;
+}
+
+button {
+  padding: 11px 11px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(56, 119, 219);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 13px;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background-color: rgb(49, 166, 199);
+  scale: 1.1;
+}
+
+button:active {
+  transform: translateY(5px);
+  background: rgb(98, 222, 115);
+}
+
+.Inputs {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 180px;
+}
+
+#messageInput {
+  height: 35px;
+  width: 50%;
+  background-color: #3a3b3f;
+  color: white;
+  border-radius: 10px;
+  border-style: solid;
+  padding-left: 12px;
+}
+
+#messageInput::placeholder {
+  color: white;
+}
+
+#messageInput:focus {
+  outline: none;
+  border-color: rgb(56, 119, 219);
+}
+
+#users,
+h3 {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: #3a3b3f;
+  color: #8ec2d3;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  min-width: 120px;
+  text-align: left;
+}
+
+#users {
+  margin-top: 70px;
+  margin-right: 17px;
+}
