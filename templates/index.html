@@ -9,7 +9,10 @@
 <body>
     <h2>Welcome, {{username}}</h2>
 
-    <div id="chatbox" style="border:1px solid #000; height:200px; overflow-y:auto; margin-bottom:10px;"></div>
+    <div id="chatBox" style="border:1px solid #000; height:200px; overflow-y:auto; margin-bottom:10px;"></div>
+
+    <input type="text" id="messageInput" placeholder="type a message...">
+    <button onclick="sendMessage()">Send</button>
 
     <h3>Active Users</h3>
     <ul id="users"></ul>
@@ -20,9 +23,17 @@
     <script>
         var socket = io();
 
+        function sendMessage() {
+            let msg = document.getElementById("messageInput").value;
+            if (msg.trim() !== "") {
+                socket.emit("message", {msg: msg});     //sends the message to the server with event name message where @socketio.on("message") is listening for it
+                document.getElementById("messageInput").value = "";    //Clears the input box after sending the message.
+            }
+        }
+
         socket.on("message", function(data){
-            let chatbox = document.getElementById("chatbox");
-            chatbox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg}</p>`;
+            let chatBox = document.getElementById("chatBox");
+            chatBox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg}</p>`;
             
         })
 
