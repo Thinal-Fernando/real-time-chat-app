@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit
 import random
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -39,7 +40,7 @@ def disconnect():
 def messages(data):
     message = data.get("msg", "")
     if message.strip():
-        emit("message", {"username": session["username"], "msg": message}, broadcast=True)
+        emit("message", {"username": session["username"], "msg": message, "timestamp": datetime.now().strftime("%H:%M:%S")}, broadcast=True)
 
 
 
