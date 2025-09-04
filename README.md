@@ -47,7 +47,7 @@ You can try the app here:
 ---
 
 
-![App Screenshot](screenshots/preview1.png)
+![App Screenshot](screenshots/preview1.png.png)
 
 
-![App Screenshot](screenshots/preview2.png)
+![App Screenshot](screenshots/preview2.png.png)
