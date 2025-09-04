@@ -9,6 +9,8 @@
 <body>
     <h2>Welcome, {{username}}</h2>
 
+    <div id="chatbox" style="border:1px solid #000; height:200px; overflow-y:auto; margin-bottom:10px;"></div>
+
     <h3>Active Users</h3>
     <ul id="users"></ul>
     
@@ -17,6 +19,12 @@
 
     <script>
         var socket = io();
+
+        socket.on("message", function(data){
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg}</p>`;
+            
+        })
 
 
         socket.on("active_users", function(users) {   //listens to active_user list coming from the server via emit

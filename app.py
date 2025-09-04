@@ -33,5 +33,13 @@ def disconnect():
         emit("active_users", list(active_users.values()), broadcast=True)   # updates all the clients again
 
 
+@socketio.on("message")
+def messages(data):
+    message = data.get("msg", "")
+    if message.strip():
+        emit("message", {"username": session["username"], "msg": message}, broadcast=True)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
