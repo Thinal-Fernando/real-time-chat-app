@@ -28,7 +28,9 @@ def connect():
 
 @socketio.event
 def disconnect():
-    print("A user disconnected")
+    if request.sid in active_users:   # checking if ID exists in the dictionary
+        del active_users[request.sid]    # removes the user from the active user list
+        emit("active_users", list(active_users.values()), broadcast=True)   # updates all the clients again
 
 
 if __name__ == "__main__":
