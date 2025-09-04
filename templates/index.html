@@ -8,16 +8,26 @@
 </head>
 <body>
     <h2>Welcome, {{username}}</h2>
+
+    <h3>Active Users</h3>
+    <ul id="users"></ul>
     
-
-
-
-
 
 
 
     <script>
         var socket = io();
+
+
+        socket.on("active_users", function(users) {   //listens to active_user list coming from the server via emit
+            let userList = document.getElementById("users");
+            userList.innerHTML = "";
+            users.forEach(user => {
+                userList.innerHTML += `<li>${user}</li>`;
+            })
+        })
+
+
     </script>
 
 
