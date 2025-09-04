@@ -24,13 +24,14 @@ def connect():
     username = session.get("username", genarate_guest_name())    # looks in the users flask session for username if not found creates one
     active_users[request.sid] = username    #storing unique id given by socket in thr dictionary
     emit("active_users", list(active_users.values()), broadcast=True)    #emit sends a event called active_users to all clients cause broadcast is true with a list of all active usernames
-
+    emit("message", {"msg": f"{username} joined the chat."}, broadcast=True)
 
 @socketio.event
 def disconnect():
     if request.sid in active_users:   # checking if ID exists in the dictionary
         del active_users[request.sid]    # removes the user from the active user list
         emit("active_users", list(active_users.values()), broadcast=True)   # updates all the clients again
+        emit("message", {"msg": f"{username} joined the chat."}, broadcast=True)
 
 
 @socketio.on("message")
