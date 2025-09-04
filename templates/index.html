@@ -1,61 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/style.css" />
     <title>Chat App</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Welcome, {{username}}</h2>
 
     <div id="chatBox"></div>
-    
+
     <div class="Inputs">
-        <input type="text" id="messageInput" placeholder="Type something...">
-        <button onclick="sendMessage()">🔼</button>
+      <input type="text" id="messageInput" placeholder="Type something..." />
+      <button onclick="sendMessage()">🔼</button>
     </div>
-    
 
     <h3>Active Users</h3>
     <ul id="users"></ul>
-    
-
-
 
     <script>
-        var socket = io();
+      var socket = io();
 
-        function sendMessage() {
-            let msg = document.getElementById("messageInput").value;
-            if (msg.trim() !== "") {
-                socket.emit("message", {msg: msg});     //sends the message to the server with event name message where @socketio.on("message") is listening for it
-                document.getElementById("messageInput").value = "";    //Clears the input box after sending the message.
-            }
+      const currentUsername = "{{username}}";
+
+      function sendMessage() {
+        let msg = document.getElementById("messageInput").value;
+        if (msg.trim() !== "") {
+          socket.emit("message", { msg: msg }); //sends the message to the server with event name message where @socketio.on("message") is listening for it
+          document.getElementById("messageInput").value = ""; //Clears the input box after sending the message.
         }
+      }
 
-        socket.on("message", function(data){
-            let chatBox = document.getElementById("chatBox");
-            chatBox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg}` + (data.timestamp ?  `<small>${data.timestamp}</small>` : '' ) + `</p>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-        })
+      socket.on("message", function (data) {
+        let chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML +=
+          `<div class="chat-message${data.username === currentUsername ? ' self' : ''}"><b>${data.username}:</b> ${data.msg}` +
+          (data.timestamp ? `<small>${data.timestamp}</small>` : "") +
+          `</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      });
 
-
-        socket.on("active_users", function(users) {   //listens to active_user list coming from the server via emit
-            let userList = document.getElementById("users");
-            userList.innerHTML = "";
-            users.forEach(user => {
-                userList.innerHTML += `<li>${user}</li>`;
-            })
-        })
-
-
+      socket.on("active_users", function (users) {
+        //listens to active_user list coming from the server via emit
+        let userList = document.getElementById("users");
+        userList.innerHTML = "";
+        users.forEach((user) => {
+          userList.innerHTML += `<li>${user}</li>`;
+        });
+      });
     </script>
-
-
-
-
-</body>
+  </body>
 </html>
