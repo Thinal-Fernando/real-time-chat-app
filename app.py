@@ -40,7 +40,7 @@ def disconnect():
 def messages(data):
     message = data.get("msg", "")
     if message.strip():
-        emit("message", {"username": session["username"], "msg": message, "timestamp": datetime.now().strftime("%H:%M:%S")}, broadcast=True)
+        emit("message", {"username": session["username"], "msg": message, "timestamp": datetime.now().strftime("%H:%M")}, broadcast=True)
 
 
 

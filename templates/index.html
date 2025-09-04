@@ -33,7 +33,7 @@
 
         socket.on("message", function(data){
             let chatBox = document.getElementById("chatBox");
-            chatBox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg} <small>${data.timestamp}</small></p>`;
+            chatBox.innerHTML +=  `<p><b>${data.username}:</b> ${data.msg}` + (data.timestamp ?  `<small>${data.timestamp}</small>` : '' ) + `</p>`;
             chatBox.scrollTop = chatBox.scrollHeight;
             
         })
