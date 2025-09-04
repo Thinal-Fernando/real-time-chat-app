@@ -19,9 +19,11 @@ def index():
     return render_template('index.html', username = session["username"])
 
 
-@socketio.event
+@socketio.event  #function bellow will listent for a socketIO event (connect)
 def connect():
-    print("A user connected")
+    username = session.get("username", genarate_guest_name())    # looks in the users flask session for username if not found creates one
+    active_users[request.sid] = username    #storing unique id given by socket in thr dictionary
+    emit("active_users", list(active_users.values()), broadcast=True)    #emit sends a event called active_users to all clients cause broadcast is true with a list of all active usernames
 
 
 @socketio.event
