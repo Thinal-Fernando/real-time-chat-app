@@ -22,12 +22,13 @@ It allows multiple users to join instantly, chat in real-time, and view the list
 ---
 
 ## 📂 Project Structure  
+``` text
 ├── app.py # Backend Flask server
 ├── templates/
 │ └── index.html # Chat UI
 ├── static/
 │ └── style.css # App styling
-
+```
 ---
 
 ## ▶️ Setup & Run Locally  
